@@ -4,6 +4,7 @@ import { ModeToggle } from "@/components/ModeToggle";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import SearchInput from "./components/SearchInput";
+import React from "react";
 
 function Dashboard({ content }: { content: React.ReactElement }) {
   return (
@@ -31,7 +32,9 @@ function Dashboard({ content }: { content: React.ReactElement }) {
           </Link>
         </nav>
         <div className="flex w-full items-center gap-4 justify-end">
-          <SearchInput />
+          <React.Suspense>
+            <SearchInput />
+          </React.Suspense>
           <ModeToggle />
           <CircleUser className="h-6 w-6" />
         </div>
