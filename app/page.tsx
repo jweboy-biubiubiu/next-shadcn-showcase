@@ -1,5 +1,7 @@
+import { redirect } from "next/navigation";
+
 function App() {
-  return null;
+  redirect("/product");
 }
 
 export default App;
