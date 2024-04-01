@@ -1,11 +1,23 @@
-const BASE_REQUEST_URL = "https://nest-api-service-gb87e12dn-jweboy.vercel.app";
+import QueryString from "qs";
 
-export const request = async (url: string, params?: any) => {
+const BASE_REQUEST_URL = "https://nest-api-service.vercel.app";
+
+export const request = async (
+  url: string,
+  options?: RequestInit & Pick<Props, "searchParams">
+) => {
+  let reqUrl = BASE_REQUEST_URL + url;
+  if (options?.searchParams) {
+    const query = QueryString.stringify(options.searchParams, {
+      addQueryPrefix: true,
+    });
+    reqUrl += query;
+  }
   try {
-    const { data, code } = await fetch(BASE_REQUEST_URL + url, {
-      body: params,
-    }).then((res) => res.json());
-    // console.log("data", data);
+    const { data, code } = await fetch(reqUrl, options).then((res) =>
+      res.json()
+    );
+    // console.log("response", data);
     if (code === 0) {
       return data;
     }

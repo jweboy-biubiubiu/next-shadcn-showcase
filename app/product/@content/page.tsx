@@ -11,13 +11,8 @@ import dayjs from "dayjs";
 import Link from "next/link";
 import React from "react";
 
-type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
 const PlatformContent = async ({ searchParams }: Props) => {
-  const data = await request("/platform");
+  const data = await request("/platform", { searchParams });
   console.log(searchParams);
   return (
     <div className="grid grid-cols-3 gap-6 ">
