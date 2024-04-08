@@ -11,15 +11,14 @@ import dayjs from "dayjs";
 import Link from "next/link";
 import React from "react";
 
-const PlatformContent = async ({ searchParams }: Props) => {
-  const data = await request("/platform", { searchParams });
-  console.log(searchParams);
+const Content = async ({ searchParams }: Props) => {
+  const data = await request("/platform", { searchParams, cache: "no-cache" });
   return (
-    <div className="grid grid-cols-3 gap-6 ">
+    <div className="w-4/5 ml-auto mr-auto grid grid-cols-3 gap-6 ">
       {Array.isArray(data) &&
         data.map((item) => (
           <Link href={item.url} target="_blank" key={item.id}>
-            <Card className="relative">
+            <Card className="relative h-[400px]">
               <CardHeader>
                 <CardTitle>{item.name}</CardTitle>
                 <CardDescription className="flex justify-between">
@@ -48,6 +47,14 @@ const PlatformContent = async ({ searchParams }: Props) => {
           </Link>
         ))}
     </div>
+  );
+};
+
+const PlatformContent = (props: Props) => {
+  return (
+    <React.Suspense>
+      <Content {...props} />
+    </React.Suspense>
   );
 };
 

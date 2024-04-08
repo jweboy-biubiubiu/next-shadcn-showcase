@@ -4,8 +4,10 @@ import { ModeToggle } from "@/components/ModeToggle";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import SearchInput from "./components/SearchInput";
+import { useParams, useSearchParams } from "next/navigation";
 
-function Dashboard({ content }: { content: React.ReactElement }) {
+function Dashboard(props: { content: React.ReactElement } & Props) {
+  const { content, searchParams } = props;
   return (
     <div className="flex min-h-screen w-full flex-col">
       <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-background px-4 z-50">
@@ -19,21 +21,21 @@ function Dashboard({ content }: { content: React.ReactElement }) {
           </Link>
           <Link
             href="/product?type=database"
-            className="text-primary transition-colors hover:text-primary"
+            className="transition-colors hover:text-primary"
           >
             Database
           </Link>
           <Link
-            href="/product?type=ui"
+            href="/product?type=design"
             className="text-muted-primary transition-colors hover:text-primary"
           >
-            UI
+            Design
           </Link>
         </nav>
         <div className="flex w-full items-center gap-4 justify-end">
           <SearchInput />
           <ModeToggle />
-          <CircleUser className="h-6 w-6" />
+          {/* <CircleUser className="h-6 w-6" /> */}
         </div>
       </header>
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">

@@ -1,12 +1,12 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
+import { Search as SearchIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import QueryString from "qs";
 import React from "react";
 
-const SearchInput = () => {
+const Search = () => {
   const searchParams = useSearchParams();
   const keyword = searchParams.get("keyword");
   const [value, setValue] = React.useState(keyword == null ? "" : keyword);
@@ -29,7 +29,7 @@ const SearchInput = () => {
 
   return (
     <div className="relative w-[400px] flex gap-x-4">
-      <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+      <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
       <Input
         type="search"
         placeholder="Please enter product name"
@@ -39,6 +39,14 @@ const SearchInput = () => {
         value={value}
       />
     </div>
+  );
+};
+
+const SearchInput = () => {
+  return (
+    <React.Suspense>
+      <Search />
+    </React.Suspense>
   );
 };
 
