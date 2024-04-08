@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import SearchInput from "./components/SearchInput";
 import { useParams, useSearchParams } from "next/navigation";
 
-function Dashboard(props: { content: React.ReactElement } & Props) {
-  const { content, searchParams } = props;
+function Dashboard(props: { content: React.ReactElement }) {
+  const { content } = props;
   return (
     <div className="flex min-h-screen w-full flex-col">
       <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-background px-4 z-50">
